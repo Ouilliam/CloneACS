@@ -1,0 +1,3 @@
+Match statistics response error : <Response [504]> || Tournament : LCK 2021 Spring || URL : {'region': 'ESPORTSTMNT03', 'gameId': '1767577', 'gameHash': '4bf522cfb2651ffd'},
+Match timeline response error : <Response [504]> || Tournament : LCK 2021 Spring || URL : {'region': 'ESPORTSTMNT05', 'gameId': '1830216', 'gameHash': '10f0366422c6bf9d'},
+Match statistics response error : <Response [504]> || Tournament : LFL 2021 Spring || URL : {'region': 'ESPORTSTMNT05', 'gameId': '1780277', 'gameHash': '84f5a1c7268a86b8'},
