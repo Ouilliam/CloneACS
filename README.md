@@ -31,3 +31,9 @@ Several files are created when executed :
 To get a cookie, first sign-in on the League of Legends website with your Riot account. Next, visit an ACS URL (such as : https://acs.leagueoflegends.com/v1/stats/game/ESPORTSTMNT06/1070986?gameHash=1787d1ea36a382c3).
 
 Use the "Inspect the element" tool, to search in the Network tab for a "Cookie" field, and copy the value in a "cookies.txt" file in the folder.
+
+## __Known Issues__
+
+The main problem of the code is that some requests are being timed out, and I don't know why (maybe an error in my code ?). Those URL actually work when pasted in a navigator, so this is kind of confusing.
+
+If you find any clue please feel free to contact me at : mailletwil@gmail.com
