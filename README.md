@@ -12,7 +12,7 @@ This project is personal & educational : I'm using this as a way to learn how re
 
 * Pymongo (be sure that MongoDB is installed and started!)
 * MWClient
-* JSON and simpleJSOn modules 
+* JSON and simpleJSON modules 
 *You can install them with `pip install pymongo` and `pip install mwclient`*, etc.
 
 ## __How to use ?__
