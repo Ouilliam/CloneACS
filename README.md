@@ -22,8 +22,10 @@ The first step is to get a connection cookie to the League of Legends website,to
 To run the program, just execute `python3 main.py` in a shell.
 
 Several files are created when executed : 
-    - "response_error_log.txt" : every request that didn't work with URL
-    - "url_error_log.txt" : every non correct URL (URL without game hash or LPL Match History links)
+<br>
+* "response_error_log.txt" : every request that didn't work with URL
+<br>
+* "url_error_log.txt" : every non correct URL (URL without game hash or LPL Match History links)
 
 ## __How to get a connection cookie ?__
 
