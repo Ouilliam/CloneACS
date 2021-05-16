@@ -3,7 +3,7 @@
 from leaguepedia_wrapper import LeaguePediaWrapper
 from acs_wrapper import ACSWrapper
 import pymongo
-import time, sys
+import time, sys, json
 
 # "Wrapper" to request on LeaguePedia 
 lpedia_wrapper = LeaguePediaWrapper()
@@ -21,7 +21,8 @@ def clone_matches_stats(lpedia_match_list, match_stats_db):
     
     i = 0
     for tournament in lpedia_match_list.keys():
-        for match in lpedia_match_list[tournament]: 
+        for match in lpedia_match_list[tournament]:
+            # Parsing URL
             parsed_url = acs_wrapper.parse_mh_url(match["MatchHistory"])
             
             if parsed_url != "not_valid":
@@ -31,19 +32,18 @@ def clone_matches_stats(lpedia_match_list, match_stats_db):
                 
                 # Merging dict 
                 to_insert = {}
-                to_insert["match_stats"] = match_stats 
-                to_insert["match_timeline"] = match_timeline
+                to_insert["match_id"], to_insert["match_stats"], to_insert["match_timeline"] = parsed_url["gameId"], match_stats, match_timeline
 
                 # Inserting in database
                 collection = match_stats_db[str(tournament)]
-                x = collection.insert_one(to_insert)
+                x = collection.update_one({"match_id":parsed_url["gameId"]}, {"$set":to_insert}, upsert=True)
 
                 # Console 
                 print('Cloning ACS data ... [{0:.4f}%][{1: ^60}]'.format(i/len(lpedia_match_list)*100, tournament), end="\r", flush=True)
         i += 1
     
-    sys.stdout.flus()
-    print("[Match statistics and timeline successfully cloned !")
+    sys.stdout.flush()
+    print("\n[Match statistics and timeline successfully cloned !")
 
 def clone_leaguepedia_matches():
     """Creates a special list of JSON objects of matches
@@ -64,7 +64,7 @@ def clone_leaguepedia_matches():
     for t in tournaments_names:
         if "OTBLX 2021 Spring Community Cup #1" in t["Tournament"]:
             tournaments_names.remove(t)
-
+ 
     leaguepedia_matches = {}
     # Cloning Leaguepedia data
     for index, t in enumerate(tournaments_names):
@@ -97,4 +97,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
+

@@ -8,8 +8,8 @@ class ACSWrapper:
     """
     
     def __init__(self):
-        self.acs_stats_url = "https://acs.leagueoflegends.com/v1/stats/game/{}/{}?gameHash={}"
-        self.acs_timeline_url = "https://acs.leagueoflegends.com/v1/stats/game/{}/{}/timeline?gameHash={}"
+        self.acs_stats_url = "https://acs.leagueoflegends.com/v1/stats/game/{}/{}?{}"
+        self.acs_timeline_url = "https://acs.leagueoflegends.com/v1/stats/game/{}/{}/timeline?{}"
         
         # Loading & formating cookie
         cookies_file = open("cookies.txt", "r")
@@ -18,8 +18,8 @@ class ACSWrapper:
 
         # Files used to investigate when there is an error on request
         # or the Leaguepedia match history URL is not correct
-        self.wrong_url = open("url_error_log.txt", "a+")
-        self.wrong_request = open("response_error_log.txt", "a+")
+        self.wrong_url = open("url_error_log.txt", "w+")
+        self.wrong_request = open("response_error_log.txt", "w+")
     
     def parse_mh_url(self, mh_url):
         """Parses a match history URL to a dictionnary
@@ -31,16 +31,13 @@ class ACSWrapper:
         Returns:
             A dictionary containing the region, gameId and gameHash
         """
+        parsed_data = {}
         # Preventing from LPL match history link and ensuring there is a gameHash
-        if "lpl" not in mh_url and "?gameHash=" in mh_url:
-            parsed_data = {}
-            parsed_data["region"] = mh_url.split("/")[5]
-            parsed_data["gameId"] = mh_url.split("/")[6].split("?gameHash=")[0]
+        if ("http://matchhistory" in mh_url or "https://matchhistory" in mh_url) and "gameHash" in mh_url:
             
-            if "&amp" in mh_url:
-                parsed_data["gameHash"] = mh_url.split("/")[6].split("?gameHash=")[1].split("&amp;tab=overview")[0]
-            else:
-                parsed_data["gameHash"] = mh_url.split("/")[6].split("?gameHash=")[1].split("tab=overview")[0]
+            parsed_data["region"] = mh_url.split("/")[5]
+            parsed_data["gameId"] = mh_url.split("/")[6].split("?")[0]
+            parsed_data["gameHash"] = mh_url.split("/")[6].split("?")[1]
 
             return parsed_data
         else:
@@ -70,7 +67,7 @@ class ACSWrapper:
         try:
             json_data = response.json()
         except simplejson.errors.JSONDecodeError:
-            self.wrong_request.write("Match statistics response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(parsed_url) + ",\n")
+            self.wrong_request.write("Match statistics response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(url) + ",\n")
 
         return json_data
 
@@ -97,7 +94,7 @@ class ACSWrapper:
         try:
             json_data = response.json()
         except simplejson.errors.JSONDecodeError:
-            self.wrong_request.write("Match timeline response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(parsed_url) + ",\n")
+            self.wrong_request.write("Match timeline response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(url) + ",\n")
 
         return json_data
         
