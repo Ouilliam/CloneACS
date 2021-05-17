@@ -36,4 +36,6 @@ Use the "Inspect the element" tool, to search in the Network tab for a "Cookie" 
 
 The main problem of the code is that some requests are being timed out, and I don't know why (maybe an error in my code ?). Those URL actually work when pasted in a navigator, so this is kind of confusing.
 
+After running several verifications, the matches seem to be in the database...which is kinda strange.
+
 If you find any clue please feel free to contact me at : mailletwil@gmail.com
