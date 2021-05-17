@@ -2,9 +2,9 @@
 
 ![](banner.png)
 
-A project to learn how to work with data, using the **Leaguepedia &amp; Riot APIs**.
+A small project to learn how to work with data, using the **Leaguepedia &amp; Riot APIs**.
 
-The current goal of it is to store every match history for competitive games of season 11. To do so, the first step is getting every competitive match "match history link" from Leaguepedia to build requests with the matches ID on the Riot ACS API and put the results in a MongoDB database.
+The current goal of it is to store every match history for competitive games of season 11 before the ACS API disappears. To do so, the first step is getting every competitive match "match history link" from Leaguepedia to build requests with the matches ID on the Riot ACS API and put the results in a MongoDB database.
 
 This project is personal & educational : I'm using this as a way to learn how retrieving and processing data in Python/MongoDB.
 
@@ -12,7 +12,7 @@ This project is personal & educational : I'm using this as a way to learn how re
 
 * Pymongo (be sure that MongoDB is installed and started!)
 * MWClient
-* JSON and simpleJSOn modules 
+* JSON and simpleJSON modules 
 *You can install them with `pip install pymongo` and `pip install mwclient`*, etc.
 
 ## __How to use ?__
@@ -31,3 +31,11 @@ Several files are created when executed :
 To get a cookie, first sign-in on the League of Legends website with your Riot account. Next, visit an ACS URL (such as : https://acs.leagueoflegends.com/v1/stats/game/ESPORTSTMNT06/1070986?gameHash=1787d1ea36a382c3).
 
 Use the "Inspect the element" tool, to search in the Network tab for a "Cookie" field, and copy the value in a "cookies.txt" file in the folder.
+
+## __Known Issues__
+
+The main problem of the code is that some requests are being timed out, and I don't know why (maybe an error in my code ?). Those URL actually work when pasted in a navigator, so this is kind of confusing.
+
+After running several verifications, the matches seem to be in the database...which is kinda strange.
+
+If you find any clue please feel free to contact me at : mailletwil@gmail.com
