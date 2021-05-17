@@ -59,11 +59,21 @@ class ACSWrapper:
         # Formating URL
         url = self.acs_stats_url.format(str(parsed_url["region"]), str(parsed_url["gameId"]), str(parsed_url["gameHash"]))
         
-        try:
-            response = requests.get(url ,cookies=self.cookies, timeout=10)
-        except requests.exceptions.RequestException:
-            print("Error when requesting")
+        # Trying to get 15 times a response before stopping and going next
+        for i in range(15):
+            try:
+                response = requests.get(url ,cookies=self.cookies, timeout=10)
+            except requests.exceptions.RequestException:
+                print("Error when requesting")
+            
+            if response.status_code == 200:
+                break
+            
+            # If we got a timeout or something like that, write it in a log 
+            if response.status_code!=200 and i==14:
+                self.wrong_request.write("Match statistics response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(url) + ",\n")
         
+        # Trying to parse the response (which can be a 504 error -> no JSON -> error when decoding)
         try:
             json_data = response.json()
         except simplejson.errors.JSONDecodeError:
@@ -86,11 +96,21 @@ class ACSWrapper:
         # Formating URL
         url = self.acs_timeline_url.format(str(parsed_url["region"]), str(parsed_url["gameId"]), (str(parsed_url["gameHash"])))
         
-        try:
-            response = requests.get(url ,cookies=self.cookies, timeout=10)
-        except requests.exceptions.RequestException:
-            print("Error when requesting")
+        # Trying to get 15 times a response before stopping and going next
+        for i in range(15):
+            try:
+                response = requests.get(url ,cookies=self.cookies, timeout=10)
+            except requests.exceptions.RequestException:
+                print("Error when requesting")
+            
+            if response.status_code == 200:
+                break
+            
+            # If we got a timeout or something like that, write it in a log 
+            if response.status_code != 200 and i==4:
+                self.wrong_request.write("Match timeline response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(url) + ",\n")
         
+        # Trying to parse the response (which can be a 504 error -> no JSON -> error when decoding)
         try:
             json_data = response.json()
         except simplejson.errors.JSONDecodeError:
