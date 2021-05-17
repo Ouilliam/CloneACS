@@ -2,11 +2,13 @@
 
 ![](./assets/banner.png)
 
-A small project to learn how to work with data, using the **Leaguepedia &amp; Riot APIs**.
+*Cloning competitive matches before the ACS API disappears*
 
-The current goal of it is to store every match history for competitive games of season 11 before the ACS API disappears. To do so, the first step is getting every competitive match "match history link" from Leaguepedia to build requests with the matches ID on the Riot ACS API and put the results in a MongoDB database.
+## __What is CloneACS ?__
 
-This project is personal & educational : I'm using this as a way to learn how retrieving and processing data in Python/MongoDB.
+CloneACS is a small program that uses the **Leaguepedia** and **Riot APIs**, to clone every League of Legends competitive matches from season 11 on the **ACS API**, into a MongoDB database. It first requests the match list on the Leaguepedia API and then uses "match history" links to request matches statistics and timelines on the **ACS API**.
+
+*This project is personal & educational : I'm using this as a way to learn how retrieving and processing data in Python/MongoDB. Therefore, there could be issues and mistakes in my code*
 
 ## __Required modules__
 
@@ -23,8 +25,8 @@ To run the program, just execute `python3 main.py` in a shell.
 
 Several files are created when executed : 
 <br>
-* "response_error_log.txt" : every request that didn't work with URL
-* "url_error_log.txt" : every non correct URL (URL without game hash or LPL Match History links)
+* "failed_requests.log" : every request that didn't work with URL
+* "incorrect_urls.log" : every non correct URL (URL without game hash or LPL Match History links)
 
 ## __How to get a connection cookie ?__
 
@@ -34,8 +36,8 @@ Use the "Inspect the element" tool, to search in the Network tab for a "Cookie" 
 
 ## __Known Issues__
 
-The main problem of the code is that some requests are being timed out, and I don't know why (maybe an error in my code ?). Those URL actually work when pasted in a navigator, so this is kind of confusing.
+Even after 15 requests, the ACS API is unstable and tends to time-out sometimes : the URLs that didn't work are not treated and you can find them in the "failed_requests.log" file created once the program is executed.
 
-After running several verifications, the matches seem to be in the database...which is kinda strange.
+## __Questions__
 
-If you find any clue please feel free to contact me at : mailletwil@gmail.com
+If you have any question, feel free to contact me here : mailletwil@gmail.com
