@@ -1,6 +1,6 @@
 # CloneACS
 
-![](banner.png)
+![](./assets/banner.png)
 
 A small project to learn how to work with data, using the **Leaguepedia &amp; Riot APIs**.
 

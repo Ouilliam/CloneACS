@@ -1,5 +1,5 @@
 cookies.txt
-response_error_log.txt
-url_error_log.txt
+incorrect_urls.log
+failed_requests.log
 README.md
-response_error_log.txt
+__pycache__

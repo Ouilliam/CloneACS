@@ -18,8 +18,8 @@ class ACSWrapper:
 
         # Files used to investigate when there is an error on request
         # or the Leaguepedia match history URL is not correct
-        self.wrong_url = open("url_error_log.txt", "w+")
-        self.wrong_request = open("response_error_log.txt", "w+")
+        self.wrong_url = open("incorrect_urls.log", "w+")
+        self.wrong_request = open("failed_requests.log", "w+")
     
     def parse_mh_url(self, mh_url):
         """Parses a match history URL to a dictionnary
@@ -71,13 +71,13 @@ class ACSWrapper:
             
             # If we got a timeout or something like that, write it in a log 
             if response.status_code!=200 and i==14:
-                self.wrong_request.write("Match statistics response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(url) + ",\n")
+                self.wrong_request.write("Match statistics request failed: " + str(response) + "| " + "Tournament: " + tournament + "||" + "URL: " + str(url) + ",\n")
         
         # Trying to parse the response (which can be a 504 error -> no JSON -> error when decoding)
         try:
             json_data = response.json()
         except simplejson.errors.JSONDecodeError:
-            self.wrong_request.write("Match statistics response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(url) + ",\n")
+            self.wrong_request.write("Match statistics request failed: " + str(response) + "||" + "Tournament : " + tournament + "||" + "URL : " + str(url) + ",\n")
 
         return json_data
 
@@ -108,13 +108,13 @@ class ACSWrapper:
             
             # If we got a timeout or something like that, write it in a log 
             if response.status_code != 200 and i==4:
-                self.wrong_request.write("Match timeline response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(url) + ",\n")
+                self.wrong_request.write("Match timeline request failed: " + str(response) + "||" + "Tournament: " + tournament + "| " + "URL: " + str(url) + ",\n")
         
         # Trying to parse the response (which can be a 504 error -> no JSON -> error when decoding)
         try:
             json_data = response.json()
         except simplejson.errors.JSONDecodeError:
-            self.wrong_request.write("Match timeline response error : " + str(response) + " || " + "Tournament : " + tournament + " || " + "URL : " + str(url) + ",\n")
+            self.wrong_request.write("Match timeline response error: " + str(response) + "||" + "Tournament: " + tournament + "||" + "URL: " + str(url) + ",\n")
 
         return json_data
         
