@@ -37,3 +37,7 @@ Use the "Inspect the element" tool, to search in the Network tab for a "Cookie" 
 ## __Known Issues__
 
 Even after 15 requests, the ACS API is unstable and tends to time-out sometimes : the URLs that didn't work are not treated and you can find them in the "failed_requests.log" file created once the program is executed.
+
+## __Questions__
+
+If you have any question, feel free to contact me here : mailletwil@gmail.com
