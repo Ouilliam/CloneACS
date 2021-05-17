@@ -2,7 +2,11 @@
 
 ![](banner.png)
 
-This program uses the **Leaguepedia** and **Riot APIs**, to clone every League of Legends competitive matches from S11 on the **ACS API**, into a MongoDB database. It first requests the match list on the Leaguepedia API and then uses "match history" links to request matches statistics and timelines on the **ACS API**.
+*Cloning competitive matches before the ACS API disappears*
+
+## __What is CloneACS ?__
+
+CloneACS is a small program that uses the **Leaguepedia** and **Riot APIs**, to clone every League of Legends competitive matches from season 11 on the **ACS API**, into a MongoDB database. It first requests the match list on the Leaguepedia API and then uses "match history" links to request matches statistics and timelines on the **ACS API**.
 
 *This project is personal & educational : I'm using this as a way to learn how retrieving and processing data in Python/MongoDB. Therefore, there could be issues and mistakes in my code*
 
