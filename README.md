@@ -2,9 +2,9 @@
 
 ![](banner.png)
 
-A project to learn how to work with data, using the **Leaguepedia &amp; Riot APIs**.
+A small project to learn how to work with data, using the **Leaguepedia &amp; Riot APIs**.
 
-The current goal of it is to store every match history for competitive games of season 11. To do so, the first step is getting every competitive match "match history link" from Leaguepedia to build requests with the matches ID on the Riot ACS API and put the results in a MongoDB database.
+The current goal of it is to store every match history for competitive games of season 11 before the ACS API disappears. To do so, the first step is getting every competitive match "match history link" from Leaguepedia to build requests with the matches ID on the Riot ACS API and put the results in a MongoDB database.
 
 This project is personal & educational : I'm using this as a way to learn how retrieving and processing data in Python/MongoDB.
 
